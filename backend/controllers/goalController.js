@@ -1,10 +1,14 @@
 const asyncHandler = require("express-async-handler"); //// if will not goint to use tryCatch
 
+const Goal = require("../models/goalModel");
+
 // @desc Get goals
-// @route Get  /api/goals
+// @route GET  /api/goals
 // @access Private
 const getGoal = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "Get goals" });
+  const goals = await Goal.find();
+  res.status(200).json(goals);
+  //   res.status(200).json({ message: "Get goals" });
 });
 
 // @desc Get goals
