@@ -7,11 +7,13 @@ const {
   deleteGoal,
 } = require("../controllers/goalController");
 
-router.route("/").get(getGoal).post(setGoal);
+const { protect } = require("../middleware/authMiddleware");
+
+router.route("/").get(protect, getGoal).post(protect, setGoal);
 // router.get("/", getGoals); // convert to one route using chaining
 // router.post("/", setGoals);
 
-router.route("/:id").delete(deleteGoal).put(updateGoal);
+router.route("/:id").delete(protect, deleteGoal).put(protect, updateGoal);
 // router.put("/:id", updateGoals); // convert to one route using chaining
 // router.delete("/:id", deleteGoals);
 
